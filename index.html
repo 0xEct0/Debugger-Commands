@@ -1,0 +1,298 @@
+<!--    
+    todo
+        - filter based on buttons
+        - combine filters
+ -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            APComs
+        </title>
+        <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/josh-vr/APComs/main/favicon.png">
+        <style>
+            p
+            {
+                font-family: "Helvetica Neue", "Arial", "sans-serif";
+                font-size: 20px;
+                margin-left: 60px;
+                width: 830px;
+                float: left;
+            }
+            input[type=text]
+            {
+                width: 255px;
+                box-sizing: border-box;
+                border: 2px solid #8be9fd;
+                border-radius: 4px;
+                font-size: 16px;
+                background-color: #44475a;
+                background-position: 10px 10px; 
+                background-repeat: no-repeat;
+                padding: 12px 20px 12px 40px;
+                -webkit-transition: width 0.5s ease-in-out;
+                transition: width 0.4s ease-in-out;
+            }
+            input[type=text]:focus 
+            {
+                width: 85%;
+                border: 2px solid #8fffab;
+                outline: none !important;
+            }
+            #DebugTable
+            {
+                margin-left: 60px;
+                margin-right: 0px;
+                border: 1px solid #bd6f5c;
+                border-right: none;
+                border-left: none;
+                border-collapse: collapse;
+                word-wrap: break-word;
+                table-layout: fixed;
+                width: 85%;
+                color: #f8f8f2
+            }
+            #DebugTable th
+            {
+                background-color: #6272a4;
+                border: 1px solid #44475a;
+                border-right: none;
+                border-left: none;
+                color: white;
+                padding-top: 12px;
+                padding-bottom: 12px;
+                padding: 8px;
+                font-family: monospace;
+                font-size: 25px;
+                text-align: left;
+                width:"50%";
+            }
+            #DebugTable td
+            {
+                border: 2px solid #44475a;
+                border-right: none;
+                border-left: none;
+                padding: 8px;
+                font-family: "Helvetica Neue", "Arial", sans-serif;
+                font-size: 16px
+            }
+            #DebugTable td:nth-child(1)
+            {
+                font-family: monospace;
+            }
+            .filter_button
+            {
+                background-color: white;
+                border: 2px solid #c13f21;
+                color: black;
+                padding: 16px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                transition-duration: 0.4s;
+                cursor: pointer;
+            }
+            .filter_button:hover
+            {
+                background-color: #c13f21;
+                color: white;
+            }
+        </style>
+    </head>
+    <body style="background-color: #282a36">
+        <h1 style="font-family: monospace; margin-left:60px; font-size:40px; color: #f8f8f2">
+            WinDBG Cheatsheet
+            <br>
+        </h1>
+
+        
+        
+        <p style="color:#f8f8f2">
+            WinDbg is a debugger tool that engineers and developers can use for analyzing and troubleshooting software issues, program crashes, and more. From a reverse engineering perspective, WinDbg allows engineers to debug code, step through instructions, view register values, perform memory analysis, and more.
+            <br>
+            <br>
+            This page contains a list of commands to aid in the use of WinDbg.
+        </p>
+
+        <br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <div class="search-box">
+            <input type="text" id="inputFilter" placeholder="Type in a keyword..." style="margin-left: 60px; color:#f5fab9" onkeyup="typeFilter()">
+        </div>
+
+        <br>
+        <br>
+
+        <table id="DebugTable">
+            <tr class="header">
+                <th width="50%">Command</th>
+                <th width="50%">Description</th>
+            </tr>
+        </table>
+    </body>
+</html>
+
+<script>
+
+fetch('https://raw.githubusercontent.com/josh-vr/APComs/main/Commands.json')
+.then((response) => 
+{
+    return response.json();
+})
+.then((myJson) => 
+{  
+    // initialize variables to add to table
+    var tbl = document.getElementById('DebugTable');
+    var new_row; // the new row to be added
+    var new_cell1; // first cell in new row
+    var new_cell2; // second cell in new row
+    var new_cell3; // third cell in new row
+    
+    // add the windbg commands
+    var length = myJson.windbg.length;
+    for (var i = 0; i < length; i++)
+    {
+        new_row = tbl.insertRow(-1);
+        new_cell1 = new_row.insertCell(0); // creates first cell
+        new_cell3 = new_row.insertCell(1);  // creates third cell
+        new_cell1.innerHTML = myJson.windbg[i].command;
+        new_cell3.innerHTML = myJson.windbg[i].description;        
+    }
+
+});
+
+// Text field search
+const typeFilter = () =>
+{
+    const trs = document.querySelectorAll('#DebugTable tr:not(.header)');
+    const filter = document.querySelector('#inputFilter').value;
+    const regex = new RegExp(filter, 'i');
+    const isFoundInTds = (td) => regex.test(td.innerHTML);
+    const isFound = (childrenArr) => childrenArr.some(isFoundInTds);
+    const setTrStyleDisplay = ({ style, children }) => 
+    {
+        style.display = isFound([...children]) ? '' : 'none';
+    };
+  
+    trs.forEach(setTrStyleDisplay);
+};
+
+
+// Clears the fields and shows everything
+function clearFields()
+{
+    // Clear the search bar text
+    document.getElementById("inputFilter").value = "";
+    
+    // Clear the text search filter
+    const trs = document.querySelectorAll('#DebugTable tr:not(.header)');
+    const filter = document.querySelector('#inputFilter').value;
+    const regex = new RegExp(filter, 'i');
+    const isFoundInTds = (td) => regex.test(td.innerHTML);
+    const isFound = (childrenArr) => childrenArr.some(isFoundInTds);
+    const setTrStyleDisplay = ({ style, children }) => 
+    {
+        style.display = isFound([...children]) ? '' : 'none';
+    };
+    trs.forEach(setTrStyleDisplay);
+    
+    // Clear table except header
+    
+    var table = document.getElementById("DebugTable");
+    for(var i = table.rows.length - 1; i > 0; i--)
+    {
+        table.deleteRow(i);
+    }
+
+    // Show everything
+    fetch('https://raw.githubusercontent.com/josh-vr/APComs/main/Commands.json')
+    .then((response) => 
+    {
+        return response.json();
+    })
+    .then((myJson) => 
+    {  
+        // initialize variables to add to table
+        var tbl = document.getElementById('DebugTable');
+        var new_row; // the new row to be added
+        var new_cell1; // first cell in new row
+        var new_cell3; // third cell in new row
+        
+        // add the windbg commands
+        var length = myJson.windbg.length;
+        for (var i = 0; i < length; i++)
+        {
+            new_row = tbl.insertRow(-1);
+            new_cell1 = new_row.insertCell(0); // creates first cell
+            new_cell3 = new_row.insertCell(1);  // creates third cell
+            new_cell1.innerHTML = myJson.windbg[i].command;
+            new_cell3.innerHTML = myJson.windbg[i].description;        
+        }
+    });
+}
+
+
+// Show only windbg commands
+function onlyWindbg()
+{
+    // Clear the search bar text
+    document.getElementById("inputFilter").value = "";
+    
+    // Clear the text search filter
+    const trs = document.querySelectorAll('#DebugTable tr:not(.header)');
+    const filter = document.querySelector('#inputFilter').value;
+    const regex = new RegExp(filter, 'i');
+    const isFoundInTds = (td) => regex.test(td.innerHTML);
+    const isFound = (childrenArr) => childrenArr.some(isFoundInTds);
+    const setTrStyleDisplay = ({ style, children }) => 
+    {
+        style.display = isFound([...children]) ? '' : 'none';
+    };
+    trs.forEach(setTrStyleDisplay);
+    
+    // Clear table except header
+    var table = document.getElementById("DebugTable");
+    for(var i = table.rows.length - 1; i > 0; i--)
+    {
+        table.deleteRow(i);
+    }
+
+    // Add only windbg commands
+    // initialize variables to add to table
+    var tbl = document.getElementById('DebugTable');
+    var new_row; // the new row to be added
+    var new_cell1; // first cell in new row
+    var new_cell2; // second cell in new row
+    var new_cell3; // third cell in new row
+    
+    // add the windbg commands
+    fetch('https://raw.githubusercontent.com/josh-vr/APComs/main/Commands.json')
+    .then((response) => 
+    {
+        return response.json();
+    })
+    .then((myJson) => 
+    {
+        // initialize variables to add to table
+        var tbl = document.getElementById('DebugTable');
+        var new_row; // the new row to be added
+        var new_cell1; // first cell in new row
+        var new_cell2; // second cell in new row
+        var new_cell3; // third cell in new row
+        
+        // add the windbg commands
+        var length = myJson.windbg.length;
+        for (var i = 0; i < length; i++)
+        {
+            new_row = tbl.insertRow(-1);
+            new_cell1 = new_row.insertCell(0); // creates first cell
+            new_cell2 = new_row.insertCell(1); // creates second cell
+            new_cell3 = new_row.insertCell(2);  // creates third cell
+            new_cell1.innerHTML = myJson.windbg[i].command;
+            new_cell2.innerHTML = myJson.windbg[i].section;
+            new_cell3.innerHTML = myJson.windbg[i].description;        
+        }
+    });
+}
+</script>

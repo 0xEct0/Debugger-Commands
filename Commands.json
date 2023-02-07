@@ -1,0 +1,25 @@
+{
+    "windbg":
+    [
+        {
+            "command": "!envvar COMPUTERNAME",
+            "description": "Get the hostname"
+        },
+        {
+            "command": "lmf",
+            "description": "List DLL files, prints out start and end addresses"
+        },
+        {
+            "command": "!address",
+            "description": "Gets the base address (start address), the end address, and the region size"
+        },
+        {
+            "command": "? [end address] - [base address]",
+            "description": "Manually calculate a region size"
+        },
+        {
+            "command": ".writemem [path on disk] [start address] L[size]",
+            "description": "Write a file given the start of address and the region size"
+        }
+    ]
+}
