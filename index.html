@@ -7,9 +7,9 @@
 <html>
     <head>
         <title>
-            APComs
+            WinDbg Commands
         </title>
-        <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/josh-vr/APComs/main/favicon.png">
+        <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/josh-vr/WinDbg-Commands/main/favicon.png">
         <style>
             p
             {
@@ -135,7 +135,7 @@
 
 <script>
 
-fetch('https://raw.githubusercontent.com/josh-vr/APComs/main/Commands.json')
+fetch('https://raw.githubusercontent.com/josh-vr/WinDbg-Commands/main/Commands.json')
 .then((response) => 
 {
     return response.json();
@@ -206,7 +206,7 @@ function clearFields()
     }
 
     // Show everything
-    fetch('https://raw.githubusercontent.com/josh-vr/APComs/main/Commands.json')
+    fetch('https://raw.githubusercontent.com/josh-vr/WinDbg-Commands/main/Commands.json')
     .then((response) => 
     {
         return response.json();
@@ -267,7 +267,7 @@ function onlyWindbg()
     var new_cell3; // third cell in new row
     
     // add the windbg commands
-    fetch('https://raw.githubusercontent.com/josh-vr/APComs/main/Commands.json')
+    fetch('https://raw.githubusercontent.com/josh-vr/WinDbg-Commands/main/Commands.json')
     .then((response) => 
     {
         return response.json();
