@@ -147,7 +147,6 @@
 // ======================================
 // MAY NEED TO CHANGE THE FOLLOWING BELOW
 // ======================================
-
 var toolList = ["WinDbg", "GDB", "GDB-PEDA"] // Add all of the debugging tools in this list, need to manually update it when making changes
 
 
@@ -167,7 +166,8 @@ fetch('https://raw.githubusercontent.com/josh-vr/Debugger-Commands/main/Commands
     
     for (var j = 0; j < toolList.length; j++)
     {
-        tool = toolList[j];
+        console.log(tool)
+        var tool = toolList[j];
         var tool_json = myJson[tool];
         var length = tool_json.length;
         for (var i = 0; i < length; i++)
@@ -175,8 +175,8 @@ fetch('https://raw.githubusercontent.com/josh-vr/Debugger-Commands/main/Commands
             new_row = tbl.insertRow(-1);
             new_cell1 = new_row.insertCell(0); // creates first cell
             new_cell3 = new_row.insertCell(1);  // creates third cell
-            new_cell1.innerHTML = myJson.tool_json[i].command;
-            new_cell3.innerHTML = "[" + tool + "] "+ myJson.tool_json[i].description;        
+            new_cell1.innerHTML = tool_json[i].command;
+            new_cell3.innerHTML = "[" + tool + "] " + tool_json[i].description;        
         }        
     }
 });
@@ -217,7 +217,6 @@ function clearFields()
     trs.forEach(setTrStyleDisplay);
     
     // Clear table except header
-    
     var table = document.getElementById("DebugTable");
     for(var i = table.rows.length - 1; i > 0; i--)
     {
@@ -241,7 +240,8 @@ function clearFields()
         
         for (var j = 0; j < toolList.length; j++)
         {
-            tool = toolList[j];
+            console.log(tool)
+            var tool = toolList[j];
             var tool_json = myJson[tool];
             var length = tool_json.length;
             for (var i = 0; i < length; i++)
@@ -249,8 +249,8 @@ function clearFields()
                 new_row = tbl.insertRow(-1);
                 new_cell1 = new_row.insertCell(0); // creates first cell
                 new_cell3 = new_row.insertCell(1);  // creates third cell
-                new_cell1.innerHTML = myJson.tool_json[i].command;
-                new_cell3.innerHTML = "[" + tool + "] "+ myJson.tool_json[i].description;        
+                new_cell1.innerHTML = tool_json[i].command;
+                new_cell3.innerHTML = "[" + tool + "] " + tool_json[i].description;        
             }        
         }
     });
@@ -289,7 +289,7 @@ function filterButton(chosenFilter)
     var new_cell1; // first cell in new row
     var new_cell3; // third cell in new row
     
-    // add the windbg commands
+    // add the specific commands
     fetch('https://raw.githubusercontent.com/josh-vr/Debugger-Commands/main/Commands.json')
     .then((response) => 
     {
