@@ -1,5 +1,5 @@
 {
-    "windbg":
+    "WinDbg":
     [
         {
             "command": "!envvar COMPUTERNAME",
@@ -21,5 +21,21 @@
             "command": ".writemem [path on disk] [start address] L[size]",
             "description": "Write a file given the start of address and the region size"
         }
+    ],
+
+    "GDB":
+    [
+        {
+            "command": "b main",
+            "description": "Puts a breakpoint at the current line"
+        }   
+    ],
+
+    "GDB-PEDA":
+    [
+        {
+            "command": "checksec",
+            "description": "Check for varius security options of binary"
+        }        
     ]
 }

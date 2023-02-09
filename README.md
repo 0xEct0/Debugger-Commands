@@ -1,5 +1,5 @@
-# WinDbg Command
+# Debugger Commands
 
-This gitpages contains a list of commands to aid in the user of WinDbg
+This gitpages contains a list of commands from different debuggers
 
-View the page [here](https://josh-vr.github.io/WinDbg-Commands/)!
+View the page [here](https://josh-vr.github.io/Debugger-Commands/)!
