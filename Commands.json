@@ -20,6 +20,66 @@
         {
             "command": ".writemem [path on disk] [start address] L[size]",
             "description": "Write a file given the start of address and the region size"
+        },
+        {
+            "command": "bp [module name/function name]",
+            "description": "Puts a breakpoint"
+        },
+        {
+            "command": "bp",
+            "description": "List all breakpoints"
+        },
+        {
+            "command": "bd [breakpoint ID]",
+            "description": "Disable a specific breakpoint"
+        },
+        {
+            "command": "be [breakpoint ID]",
+            "description": "Enable a specific breakpoint"
+        },
+        {
+            "command": "bc *",
+            "description": "Clear all "
+        },
+        {
+            "command": "g",
+            "description": "Execute the instructions"
+        },
+        {
+            "command": "gu",
+            "description": "To execute the instruction until current functions ends"
+        },
+        {
+            "command": "t",
+            "description": "Trace through instruction and to get in the CALL instruction"
+        },
+        {
+            "command": "p",
+            "description": "Step through instruction and to treat a CALL as a single instruction"
+        },
+        {
+            "command": "dv",
+            "description": "To display the local variables"
+        },
+        {
+            "command": "dt",
+            "description": "Display the type of the symbol"
+        },
+        {
+            "command": "r",
+            "description": "Display the value of registers"
+        },
+        {
+            "command": "r [register name]=[value]",
+            "description": "Set the value of a register"
+        },
+        {
+            "command": "uf [function name]",
+            "description": "Disassemble a function"
+        },
+        {
+            "command": "wt",
+            "description": "See stats of a function"
         }
     ],
 
@@ -36,6 +96,82 @@
         {
             "command": "checksec",
             "description": "Check for varius security options of binary"
-        }        
+        },
+        {
+            "command": "aslr",
+            "description": "Show/set ASLR (address space layout randomization) setting of GDB"
+        },
+        {
+            "command": "dumpargs",
+            "description": "Display arguments passed to a function when stopped at a call instruction"
+        },
+        {
+            "command": "dumprop",
+            "description": "Dump all ROP gadgets in specific memory range"
+        },
+        {
+            "command": "elfheader",
+            "description": "Get headers information from debugged ELF file"
+        },
+        {
+            "command": "elfsymbol",
+            "description": "Get non-debugging symbol information from an ELF file"
+        },
+        {
+            "command": "lookup",
+            "description": "Search for all addresses/references to address which belong to a memory range"
+        },
+        {
+            "command": "patch",
+            "description": "Patch memory start at an address with string/hexstring/int"
+        },
+        {
+            "command": "pattern",
+            "description": "Generate, search, or write a cyclic pattern to memory"
+        },
+        {
+            "command": "procinfo",
+            "description": "Display various info from /proc/pid/"
+        },
+        {
+            "command": "pshow",
+            "description": "Show various PEDA options and other settings"
+        },
+        {
+            "command": "pset",
+            "description": "Set various PEDA options and other strings"
+        },
+        {
+            "command": "readelf",
+            "description": "Get headers information from an ELF file"
+        },
+        {
+            "command": "ropgadget",
+            "description": "Get common ROP gadgets of binary or library"
+        },
+        {
+            "command": "ropsearch",
+            "description": "Search for ROP gadgets in memory"
+        },
+        {
+            "command": "searchmem|find",
+            "description": "Search for a pattern in memory; supports regex search"
+        },
+        {
+            "command": "shellcode",
+            "description": "Generate or download common shellcodes"
+        },
+        {
+            "command": "skeleton",
+            "description": "Generate python exploit code template"
+        },
+        {
+            "command": "vmmap",
+            "description": "Get virtual mapping address ranges of section(s) in debugged process"
+        },
+        {
+            "command": "xormem",
+            "description": "XOR a memory region with a key"
+        }
     ]
 }
