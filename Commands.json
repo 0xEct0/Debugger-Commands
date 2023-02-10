@@ -87,7 +87,7 @@
     [
         {
             "command": "b main",
-            "description": "Puts a breakpoint at the current line"
+            "description": "Puts a breakpoint at the beginning of the program"
         }   
     ],
 
