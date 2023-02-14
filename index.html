@@ -132,7 +132,7 @@
         <button class="filter_button" style="margin-left: 60px;" onclick="clearFields();">Show All</button>
         <button class="filter_button" onclick="filterButton('WinDbg');">WinDbg</button>
         <button class="filter_button" onclick="filterButton('GDB');">GDB</button>
-        <button class="filter_button" onclick="filterButton('GDB-PEDA');">GDB-PEDA</button>
+        <button class="filter_button" onclick="filterButton('GDB-PWNDBG');">GDB-PWNDBG</button>
 
         <br>
         <br>
@@ -152,7 +152,7 @@
 // ======================================
 // MAY NEED TO CHANGE THE FOLLOWING BELOW
 // ======================================
-var toolList = ["WinDbg", "GDB", "GDB-PEDA"] // Add all of the debugging tools in this list, need to manually update it when making changes
+var toolList = ["WinDbg", "GDB", "GDB-PWNDBG"] // Add all of the debugging tools in this list, need to manually update it when making changes
 
 
 fetch('https://raw.githubusercontent.com/josh-vr/Debugger-Commands/main/Commands.json')
@@ -171,7 +171,6 @@ fetch('https://raw.githubusercontent.com/josh-vr/Debugger-Commands/main/Commands
     
     for (var j = 0; j < toolList.length; j++)
     {
-        console.log(tool)
         var tool = toolList[j];
         var tool_json = myJson[tool];
         var length = tool_json.length;
@@ -180,7 +179,7 @@ fetch('https://raw.githubusercontent.com/josh-vr/Debugger-Commands/main/Commands
             new_row = tbl.insertRow(-1);
             new_cell1 = new_row.insertCell(0); // creates first cell
             new_cell2 = new_row.insertCell(1);  // creates second cell
-            new_cell3 = new_row.insertCell(3); // creates third cell
+            new_cell3 = new_row.insertCell(2); // creates third cell
             new_cell1.innerHTML = tool_json[i].command; // inserts command
             new_cell2.innerHTML = "[" + tool + "] " + tool_json[i].description; // inserts description
             new_cell3.innerHTML = tool_json[i].example;
@@ -256,7 +255,7 @@ function clearFields()
                 new_row = tbl.insertRow(-1);
                 new_cell1 = new_row.insertCell(0); // creates first cell
                 new_cell2 = new_row.insertCell(1);  // creates second cell
-                new_cell3 = new_row.insertCell(3); // creates third cell
+                new_cell3 = new_row.insertCell(2); // creates third cell
                 new_cell1.innerHTML = tool_json[i].command; // inserts command
                 new_cell2.innerHTML = "[" + tool + "] " + tool_json[i].description; // inserts description
                 new_cell3.innerHTML = tool_json[i].example;       
@@ -296,6 +295,7 @@ function filterButton(chosenFilter)
     var tbl = document.getElementById('DebugTable');
     var new_row; // the new row to be added
     var new_cell1; // first cell in new row
+    var new_cell2; // second cell in new row
     var new_cell3; // third cell in new row
     
     // add the specific commands
@@ -310,6 +310,7 @@ function filterButton(chosenFilter)
         var tbl = document.getElementById('DebugTable');
         var new_row; // the new row to be added
         var new_cell1; // first cell in new row
+        var new_cell2; // second cell in new row
         var new_cell3; // third cell in new row
         
         // add the commands
@@ -320,10 +321,10 @@ function filterButton(chosenFilter)
             new_row = tbl.insertRow(-1);
             new_cell1 = new_row.insertCell(0); // creates first cell
             new_cell2 = new_row.insertCell(1);  // creates second cell
-            new_cell3 = new_row.insertCell(3); // creates third cell
-            new_cell1.innerHTML = tool_json[i].command; // inserts command
-            new_cell2.innerHTML = "[" + tool + "] " + tool_json[i].description; // inserts description
-            new_cell3.innerHTML = tool_json[i].example;      
+            new_cell3 = new_row.insertCell(2); // creates third cell
+            new_cell1.innerHTML = chosen_command[i].command; // inserts command
+            new_cell2.innerHTML = "[" + chosenFilter + "] " + chosen_command[i].description; // inserts description
+            new_cell3.innerHTML = chosen_command[i].example;      
         }
     });
 }
