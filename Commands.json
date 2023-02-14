@@ -1,177 +1,135 @@
+
 {
-    "WinDbg":
+    "WinDbg": 
     [
         {
-            "command": "!envvar COMPUTERNAME",
-            "description": "Get the hostname"
-        },
-        {
-            "command": "lmf",
-            "description": "List DLL files, prints out start and end addresses"
+            "command": "s [base address] L?[range size] [hex bytes]",
+            "description": "Search for a specific byte pattern in memory - useful if you already know specific bytes (e.g. a payload) and you want to find the address of where it is",
+            "example": "s 0 L?8000000000000000 fc 48 83 e4 f0 e8 cc 00 00 00 41 51 41 50"
         },
         {
             "command": "!address",
-            "description": "Gets the base address (start address), the end address, and the region size"
+            "description": "Displays information about the memory that the target process or target computer uses",
+            "example": "!address 75831234"
+        },
+        {
+            "command": "!envvar COMPUTERNAME",
+            "description": "Get the hostname",
+            "example": "!envvar COMPUTERNAME"
+        },
+        {
+            "command": "lmf",
+            "description": "List DLL files, prints out start and end addresses",
+            "example": "lmf"
+        },
+        {
+            "command": "!address",
+            "description": "Gets the base address (start address), the end address, and the region size",
+            "example": "!address 0x00007FF64C600000"
         },
         {
             "command": "? [end address] - [base address]",
-            "description": "Manually calculate a region size"
+            "description": "Manually calculate a region size",
+            "example": "? 0x00007FF64C601000 - 0x00007FF64C600000"
         },
         {
             "command": ".writemem [path on disk] [start address] L[size]",
-            "description": "Write a file given the start of address and the region size"
+            "description": "Write a file given the start of address and the region size",
+            "example": ".writemem C:\\testfile.bin 0x00007FF64C600000 L1000"
         },
         {
             "command": "bp [module name/function name]",
-            "description": "Puts a breakpoint"
+            "description": "Puts a breakpoint",
+            "example": "bp mymodule!myfunction"
         },
         {
             "command": "bp",
-            "description": "List all breakpoints"
+            "description": "List all breakpoints",
+            "example": "bp"
         },
         {
             "command": "bd [breakpoint ID]",
-            "description": "Disable a specific breakpoint"
+            "description": "Disable a specific breakpoint",
+            "example": "bd 1"
         },
         {
             "command": "be [breakpoint ID]",
-            "description": "Enable a specific breakpoint"
+            "description": "Enable a specific breakpoint",
+            "example": "be 1"
         },
         {
             "command": "bc *",
-            "description": "Clear all "
+            "description": "Clear all breakpoints",
+            "example": "bc *"
         },
         {
             "command": "g",
-            "description": "Execute the instructions"
+            "description": "Execute the instructions",
+            "example": "g"
         },
         {
             "command": "gu",
-            "description": "To execute the instruction until current functions ends"
+            "description": "To execute the instruction until the current function ends",
+            "example": "gu"
         },
         {
             "command": "t",
-            "description": "Trace through instruction and to get in the CALL instruction"
+            "description": "Trace through instruction and to get in the CALL instruction",
+            "example": "t"
         },
         {
             "command": "p",
-            "description": "Step through instruction and to treat a CALL as a single instruction"
+            "description": "Step through instruction and to treat a CALL as a single instruction",
+            "example": "p"
         },
         {
             "command": "dv",
-            "description": "To display the local variables"
+            "description": "To display the local variables",
+            "example": "dv"
         },
         {
             "command": "dt",
-            "description": "Display the type of the symbol"
+            "description": "Display the type of the symbol",
+            "example": "dt mystruct"
         },
         {
             "command": "r",
-            "description": "Display the value of registers"
+            "description": "Display the value of registers",
+            "example": "r"
         },
         {
             "command": "r [register name]=[value]",
-            "description": "Set the value of a register"
+            "description": "Set the value of a register",
+            "example": "r rax=12345678"
         },
         {
             "command": "uf [function name]",
-            "description": "Disassemble a function"
+            "description": "Disassemble a function",
+            "example": ""
         },
         {
             "command": "wt",
-            "description": "See stats of a function"
+            "description": "See stats of a function",
+            "example": ""
         }
     ],
-
+  
     "GDB":
     [
         {
             "command": "b main",
-            "description": "Puts a breakpoint at the beginning of the program"
+            "description": "Puts a breakpoint at the beginning of the program",
+            "example": ""
         }   
     ],
 
-    "GDB-PEDA":
+    "GDB-PWNDBG":
     [
+ 
         {
-            "command": "checksec",
-            "description": "Check for varius security options of binary"
-        },
-        {
-            "command": "aslr",
-            "description": "Show/set ASLR (address space layout randomization) setting of GDB"
-        },
-        {
-            "command": "dumpargs",
-            "description": "Display arguments passed to a function when stopped at a call instruction"
-        },
-        {
-            "command": "dumprop",
-            "description": "Dump all ROP gadgets in specific memory range"
-        },
-        {
-            "command": "elfheader",
-            "description": "Get headers information from debugged ELF file"
-        },
-        {
-            "command": "elfsymbol",
-            "description": "Get non-debugging symbol information from an ELF file"
-        },
-        {
-            "command": "lookup",
-            "description": "Search for all addresses/references to address which belong to a memory range"
-        },
-        {
-            "command": "patch",
-            "description": "Patch memory start at an address with string/hexstring/int"
-        },
-        {
-            "command": "pattern",
-            "description": "Generate, search, or write a cyclic pattern to memory"
-        },
-        {
-            "command": "procinfo",
-            "description": "Display various info from /proc/pid/"
-        },
-        {
-            "command": "pshow",
-            "description": "Show various PEDA options and other settings"
-        },
-        {
-            "command": "pset",
-            "description": "Set various PEDA options and other strings"
-        },
-        {
-            "command": "readelf",
-            "description": "Get headers information from an ELF file"
-        },
-        {
-            "command": "ropgadget",
-            "description": "Get common ROP gadgets of binary or library"
-        },
-        {
-            "command": "ropsearch",
-            "description": "Search for ROP gadgets in memory"
-        },
-        {
-            "command": "searchmem|find",
-            "description": "Search for a pattern in memory; supports regex search"
-        },
-        {
-            "command": "shellcode",
-            "description": "Generate or download common shellcodes"
-        },
-        {
-            "command": "skeleton",
-            "description": "Generate python exploit code template"
-        },
-        {
-            "command": "vmmap",
-            "description": "Get virtual mapping address ranges of section(s) in debugged process"
-        },
-        {
-            "command": "xormem",
-            "description": "XOR a memory region with a key"
+            "command": "cyclic -n [pattern size] [length]",
+            "description": "Generate a cyclic pattern to use",
+            "example": "cyclic -n 4 100"
         }
     ]
 }

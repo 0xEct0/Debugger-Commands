@@ -80,6 +80,10 @@
             {
                 font-family: monospace;
             }
+            #DebugTable td:nth-child(3)
+            {
+                font-family: monospace;
+            }
             .filter_button
             {
                 background-color: #44475a;
@@ -135,8 +139,9 @@
 
         <table id="DebugTable">
             <tr class="header">
-                <th width="50%">Command</th>
-                <th width="50%">Description</th>
+                <th width="33%">Command</th>
+                <th width="33%">Description</th>
+                <th width="33%">Example</th>
             </tr>
         </table>
     </body>
@@ -174,9 +179,11 @@ fetch('https://raw.githubusercontent.com/josh-vr/Debugger-Commands/main/Commands
         {
             new_row = tbl.insertRow(-1);
             new_cell1 = new_row.insertCell(0); // creates first cell
-            new_cell3 = new_row.insertCell(1);  // creates third cell
-            new_cell1.innerHTML = tool_json[i].command;
-            new_cell3.innerHTML = "[" + tool + "] " + tool_json[i].description;        
+            new_cell2 = new_row.insertCell(1);  // creates second cell
+            new_cell3 = new_row.insertCell(3); // creates third cell
+            new_cell1.innerHTML = tool_json[i].command; // inserts command
+            new_cell2.innerHTML = "[" + tool + "] " + tool_json[i].description; // inserts description
+            new_cell3.innerHTML = tool_json[i].example;
         }        
     }
 });
@@ -248,9 +255,11 @@ function clearFields()
             {
                 new_row = tbl.insertRow(-1);
                 new_cell1 = new_row.insertCell(0); // creates first cell
-                new_cell3 = new_row.insertCell(1);  // creates third cell
-                new_cell1.innerHTML = tool_json[i].command;
-                new_cell3.innerHTML = "[" + tool + "] " + tool_json[i].description;        
+                new_cell2 = new_row.insertCell(1);  // creates second cell
+                new_cell3 = new_row.insertCell(3); // creates third cell
+                new_cell1.innerHTML = tool_json[i].command; // inserts command
+                new_cell2.innerHTML = "[" + tool + "] " + tool_json[i].description; // inserts description
+                new_cell3.innerHTML = tool_json[i].example;       
             }        
         }
     });
@@ -310,9 +319,11 @@ function filterButton(chosenFilter)
         {
             new_row = tbl.insertRow(-1);
             new_cell1 = new_row.insertCell(0); // creates first cell
-            new_cell3 = new_row.insertCell(1);  // creates second cell
-            new_cell1.innerHTML = chosen_command[i].command;
-            new_cell3.innerHTML = "[" + chosenFilter + "] " + chosen_command[i].description;        
+            new_cell2 = new_row.insertCell(1);  // creates second cell
+            new_cell3 = new_row.insertCell(3); // creates third cell
+            new_cell1.innerHTML = tool_json[i].command; // inserts command
+            new_cell2.innerHTML = "[" + tool + "] " + tool_json[i].description; // inserts description
+            new_cell3.innerHTML = tool_json[i].example;      
         }
     });
 }
