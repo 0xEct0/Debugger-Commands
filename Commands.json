@@ -8,6 +8,11 @@
             "example": "s 0 L?8000000000000000 fc 48 83 e4 f0 e8 cc 00 00 00 41 51 41 50"
         },
         {
+            "command": "!address -f:[Protection Attribute]",
+            "description": "Display information about the virtual memory regions allocated in the target process that have the specific protection attribute. Attributes include PAGE_EXECUTE, PAGE_EXECUTE_READ, PAGE_EXECUTE_READWRITE, PAGE_READONLY, PAGE_WRITECOPY, PAGE_READWRITE",
+            "example": "!address -f:PAGE_READWRITE"
+        },
+        {
             "command": "!address",
             "description": "Displays information about the memory that the target process or target computer uses",
             "example": "!address 75831234"
