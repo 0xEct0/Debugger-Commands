@@ -3,9 +3,9 @@
     "WinDbg": 
     [
         {
-            "command": "s [base address] L?[range size] [hex bytes]",
-            "description": "Search for a specific byte pattern in memory - useful if you already know specific bytes (e.g. a payload) and you want to find the address of where it is",
-            "example": "s 0 L?8000000000000000 fc 48 83 e4 f0 e8 cc 00 00 00 41 51 41 50"
+            "command": "!address",
+            "description": "Displays information about the memory that the target process or target computer uses",
+            "example": "!address 75831234"
         },
         {
             "command": "!address -f:[Protection Attribute]",
@@ -13,9 +13,9 @@
             "example": "!address -f:PAGE_READWRITE"
         },
         {
-            "command": "!address",
-            "description": "Displays information about the memory that the target process or target computer uses",
-            "example": "!address 75831234"
+            "command": "!dh [address]",
+            "description": "Display the headers for a specific portion of memory",
+            "example": "!dh 0x7fff486a0000"
         },
         {
             "command": "!envvar COMPUTERNAME",
@@ -23,19 +23,9 @@
             "example": "!envvar COMPUTERNAME"
         },
         {
-            "command": "lmf",
-            "description": "List DLL files, prints out start and end addresses",
-            "example": "lmf"
-        },
-        {
-            "command": "!address",
-            "description": "Gets the base address (start address), the end address, and the region size",
-            "example": "!address 0x00007FF64C600000"
-        },
-        {
-            "command": "? [end address] - [base address]",
-            "description": "Manually calculate a region size",
-            "example": "? 0x00007FF64C601000 - 0x00007FF64C600000"
+            "command": "!teb [address]",
+            "description": "Show threat environment block for one specific thread",
+            "example": "!teb 0000005d`7d963000"
         },
         {
             "command": ".writemem [path on disk] [start address] L[size]",
@@ -43,14 +33,14 @@
             "example": ".writemem C:\\testfile.bin 0x00007FF64C600000 L1000"
         },
         {
-            "command": "bp [module name/function name]",
-            "description": "Puts a breakpoint",
-            "example": "bp mymodule!myfunction"
+            "command": "? [end address] - [base address]",
+            "description": "Manually calculate a region size",
+            "example": "? 0x00007FF64C601000 - 0x00007FF64C600000"
         },
         {
-            "command": "bp",
-            "description": "List all breakpoints",
-            "example": "bp"
+            "command": "bc *",
+            "description": "Clear all breakpoints",
+            "example": "bc *"
         },
         {
             "command": "bd [breakpoint ID]",
@@ -63,9 +53,24 @@
             "example": "be 1"
         },
         {
-            "command": "bc *",
-            "description": "Clear all breakpoints",
-            "example": "bc *"
+            "command": "bp",
+            "description": "List all breakpoints",
+            "example": "bp"
+        },
+        {
+            "command": "bp [module name/function name]",
+            "description": "Puts a breakpoint",
+            "example": "bp mymodule!myfunction"
+        },
+        {
+            "command": "dt",
+            "description": "Display the type of the symbol",
+            "example": "dt mystruct"
+        },
+        {
+            "command": "dv",
+            "description": "To display the local variables",
+            "example": "dv"
         },
         {
             "command": "g",
@@ -78,24 +83,14 @@
             "example": "gu"
         },
         {
-            "command": "t",
-            "description": "Trace through instruction and to get in the CALL instruction",
-            "example": "t"
+            "command": "lmf",
+            "description": "List DLL files, prints out start and end addresses",
+            "example": "lmf"
         },
         {
             "command": "p",
             "description": "Step through instruction and to treat a CALL as a single instruction",
             "example": "p"
-        },
-        {
-            "command": "dv",
-            "description": "To display the local variables",
-            "example": "dv"
-        },
-        {
-            "command": "dt",
-            "description": "Display the type of the symbol",
-            "example": "dt mystruct"
         },
         {
             "command": "r",
@@ -106,6 +101,21 @@
             "command": "r [register name]=[value]",
             "description": "Set the value of a register",
             "example": "r rax=12345678"
+        },
+        {
+            "command": "s [base address] L?[range size] [hex bytes]",
+            "description": "Search for a specific byte pattern in memory - useful if you already know specific bytes (e.g. a payload) and you want to find the address of where it is",
+            "example": "s 0 L?8000000000000000 fc 48 83 e4 f0 e8 cc 00 00 00 41 51 41 50"
+        },
+        {
+            "command": "s-sa [base address] [end address]",
+            "description": "Check a range of addresses (base to end) for strings",
+            "example": "s-sa 00007fff`486a0000 00007fff`486a1000"
+        },
+        {
+            "command": "t",
+            "description": "Trace through instruction and to get in the CALL instruction",
+            "example": "t"
         },
         {
             "command": "uf [function name]",
